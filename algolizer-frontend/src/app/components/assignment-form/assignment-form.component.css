@@ -1,0 +1,11 @@
+.assignment_form {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    column-gap: 10px;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.add_button {
+    padding: 27px;
+}

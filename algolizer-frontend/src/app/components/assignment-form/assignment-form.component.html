@@ -1,0 +1,14 @@
+<div class="centered">
+    <span class="app-text">Put together your exercise test for your exam!</span> <br> <br>
+    <form class="centered assignment_form">
+        <mat-form-field>
+          <input class="centered" type="text" name="problemType" [(ngModel)]="problemType" matInput placeholder="Problem type...">
+        </mat-form-field> 
+
+        <mat-form-field>
+            <input class="centered" type="number" name="numOfProblems" [(ngModel)]="numOfProblems" matInput placeholder="Number of problems">
+        </mat-form-field> 
+        <button class="add_button" mat-raised-button color="primary" (click)="onSubmit()">Add problem type</button>
+      </form>
+</div>
+

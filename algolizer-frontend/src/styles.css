@@ -5,6 +5,10 @@ body {
     margin: 0px; font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: rgb(216, 229, 237);
 }
+.app-text {
+    text-decoration: solid;
+    font-size: x-large;
+}
 
 .centered {
     text-align: center;
