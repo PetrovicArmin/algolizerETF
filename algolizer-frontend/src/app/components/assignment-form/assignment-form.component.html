@@ -2,8 +2,13 @@
     <span class="app-text">Put together your exercise test for your exam!</span> <br> <br>
     <form class="centered assignment_form">
         <mat-form-field>
-          <input class="centered" type="text" name="problemType" [(ngModel)]="problemType" matInput placeholder="Problem type...">
+          <input [matAutocomplete]="auto" class="centered" type="text" name="problemType" [(ngModel)]="problemType" matInput placeholder="Problem type..." [formControl]="myControl">
         </mat-form-field> 
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let type of filteredOptions | async" [value]="type">
+                {{ type }}
+            </mat-option>
+        </mat-autocomplete>
 
         <mat-form-field>
             <input class="centered" type="number" name="numOfProblems" [(ngModel)]="numOfProblems" matInput placeholder="Number of problems">
