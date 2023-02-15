@@ -1,7 +1,19 @@
 <mat-toolbar class="navigation" color="accent">
     <span>{{ applicationName }} {{ version }}</span>
-    <div>
+    <div *ngIf="this.showCircle" class="centered">    
+        <div>
+            <mat-progress-spinner 
+                class="example-margin"
+                [color]="'primary'"
+                [mode]="'indeterminate'"
+                [diameter]="30">
+            </mat-progress-spinner>
+        </div>
+    </div>
+    <div *ngIf="!this.showCircle">
         <img src="assets/img/etf_logo_720.png" height="50" width="50" alt="ETF logo">
     </div>
-    <span>{{ developerEmail }}</span>
+    <span>  
+        <button mat-raised-button color="primary" (click)="refreshRecommendations()">Refresh recommendations</button> 
+    </span>
 </mat-toolbar>
