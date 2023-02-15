@@ -6,8 +6,13 @@
 .recommendations {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding-left: 15%;
-    padding-right: 15%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.subrecommendation-text {
+    font-style: italic;
+    font-size: large;
 }
 
 .chipMargin {
