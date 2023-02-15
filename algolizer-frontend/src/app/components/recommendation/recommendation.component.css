@@ -1,0 +1,26 @@
+.recommendation-text {
+    text-decoration: solid;
+    font-size: x-large;
+}
+
+.recommendations {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.chipMargin {
+    margin: 5px;
+}
+
+
+@media only screen and (max-width: 800px) {
+    .recommendations {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }   
+}
+
+
