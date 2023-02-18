@@ -1,6 +1,6 @@
 <div class="centered">
     <span class="app-text">Based on our recommendation system, you should revise:</span><br><br>
-    <div class="recommendations">
+    <div class="recommendations" @insertRemoveRecommendations *ngIf="isShown">
             <div>
                 <mat-chip class="chipMargin" [ngStyle]="{'background-color': 'pink'}">
                     <img matChipAvatar src="assets/img/dsa.png" alt="Photo of a Shiba Inu"/>
@@ -19,5 +19,8 @@
                     <strong class="subrecommendation-text">Dijkstring algoritam</strong>
                 </mat-chip>
             </div>
+    </div>
+    <div *ngIf="!isShown">
+        <br><br>
     </div>
 </div>
