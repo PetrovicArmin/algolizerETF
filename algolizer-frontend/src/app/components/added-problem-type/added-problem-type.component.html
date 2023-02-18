@@ -1,0 +1,11 @@
+<mat-card class="item-container">
+    <div>
+        <mat-card-content>{{addedProblemType.problemType}}</mat-card-content>
+    </div>
+    <div>
+        <mat-card-content>{{addedProblemType.quantity}}</mat-card-content>
+    </div>
+    <div class="delete-button">
+        <button mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+    </div>
+</mat-card>

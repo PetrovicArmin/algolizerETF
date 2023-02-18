@@ -15,5 +15,20 @@
         </mat-form-field> 
         <button class="add_button" mat-raised-button color="primary" (click)="onSubmit()">Add problem type</button>
       </form>
+      <br>
+      <div>
+        <mat-card class="item-container">
+            <div>
+                <mat-card-content><strong>Problem type</strong></mat-card-content>
+            </div>
+            <div>
+                <mat-card-content><strong>Quantity</strong></mat-card-content>
+            </div>
+            <div>
+            </div>
+        </mat-card>
+        <app-added-problem-type *ngFor="let item of addedProblemTypes" [addedProblemType]="item" (onDeleteEvent)="onDelete($event)">
+        </app-added-problem-type>
+      </div>
 </div>
 

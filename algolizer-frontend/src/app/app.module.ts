@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,13 +16,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { RecommendationComponent } from './components/recommendation/recommendation.component';
 import { AssignmentFormComponent } from './components/assignment-form/assignment-form.component';
+import { AddedProblemTypeComponent } from './components/added-problem-type/added-problem-type.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     RecommendationComponent,
-    AssignmentFormComponent
+    AssignmentFormComponent,
+    AddedProblemTypeComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { AssignmentFormComponent } from './components/assignment-form/assignment
     MatFormFieldModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,8 @@ import ProblemType from 'src/app/enums/ProblemType';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import AddedProblemType from 'src/app/interfaces/AddedProblemType';
+import { ProblemTypeService } from 'src/app/services/problem-type.service';
 
 
 @Component({
@@ -13,11 +15,17 @@ import { Observable } from 'rxjs';
 
 export class AssignmentFormComponent implements OnInit {
   problemType: string = "";
-  numOfProblems: Number = 0;
+  numOfProblems: number = 0;
   problemTypes: string[] = Object.values(ProblemType);
   myControl: FormControl = new FormControl();
   filteredOptions: Observable<string[]> = new Observable<string[]>;
+  addedProblemTypes: AddedProblemType[] = [{problemType: ProblemType.BINARY_SEARCH, quantity:34}, {problemType: ProblemType.BUBBLE_SORT, quantity:22}];
 
+  constructor(
+    private problemTypeService: ProblemTypeService
+  ) {
+
+  }
   ngOnInit(){
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -31,6 +39,17 @@ export class AssignmentFormComponent implements OnInit {
   } 
 
   onSubmit(): void {
-    console.log("My variables are: " + this.problemType + ", and " + this.numOfProblems);
+    if (this.addedProblemTypes.filter(prT => prT.problemType == (<any>ProblemType)[this.problemTypeService.getKeyByValue(this.problemType)]).length != 0) {
+      console.log("message about already in list!");
+      return;
+    }
+    this.addedProblemTypes.push({
+      problemType: (<any>ProblemType)[this.problemTypeService.getKeyByValue(this.problemType)],
+      quantity: this.numOfProblems
+    });
+  }
+
+  onDelete(problemTypeToDelete: ProblemType) {
+    this.addedProblemTypes = this.addedProblemTypes.filter(addedProblem => addedProblem.problemType != problemTypeToDelete);
   }
 }
