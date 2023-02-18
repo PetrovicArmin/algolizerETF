@@ -19,7 +19,7 @@ export class AssignmentFormComponent implements OnInit {
   problemTypes: string[] = Object.values(ProblemType);
   myControl: FormControl = new FormControl();
   filteredOptions: Observable<string[]> = new Observable<string[]>;
-  addedProblemTypes: AddedProblemType[] = [{problemType: ProblemType.BINARY_SEARCH, quantity:34}, {problemType: ProblemType.BUBBLE_SORT, quantity:22}];
+  addedProblemTypes: AddedProblemType[] = [];
 
   constructor(
     private problemTypeService: ProblemTypeService
