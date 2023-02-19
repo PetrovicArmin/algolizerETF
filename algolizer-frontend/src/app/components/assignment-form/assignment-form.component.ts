@@ -5,6 +5,10 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import AddedProblemType from 'src/app/interfaces/AddedProblemType';
 import { ProblemTypeService } from 'src/app/services/problem-type.service';
+import { DialogOpenerService } from 'src/app/services/dialog-opener.service';
+import { SameProblemTypeErrorComponent } from 'src/app/dialogs/same-problem-type-error/same-problem-type-error.component';
+import { NonExistentProblemTypeComponent } from 'src/app/dialogs/non-existent-problem-type/non-existent-problem-type.component';
+import { QuantityErrorComponent } from 'src/app/dialogs/quantity-error/quantity-error.component';
 
 
 @Component({
@@ -22,7 +26,8 @@ export class AssignmentFormComponent implements OnInit {
   addedProblemTypes: AddedProblemType[] = [];
 
   constructor(
-    private problemTypeService: ProblemTypeService
+    private problemTypeService: ProblemTypeService,
+    private dialogOpenerService: DialogOpenerService
   ) {
 
   }
@@ -38,11 +43,26 @@ export class AssignmentFormComponent implements OnInit {
     return this.problemTypes.filter(option => option.toLowerCase().includes(filterValue));
   } 
 
-  onSubmit(): void {
-    if (this.addedProblemTypes.filter(prT => prT.problemType == this.problemTypeService.getProblemTypeFromValue(this.problemType)).length != 0) {
-      alert("That item is already in the list!");
-      return;
+  validateSubmit(): boolean {
+    if (this.problemTypes.indexOf(this.problemType) == -1) {
+      this.dialogOpenerService.openDialog(NonExistentProblemTypeComponent, '250px', '300ms', '100ms');
+      return false;
     }
+    if (this.addedProblemTypes.filter(prT => prT.problemType == this.problemTypeService.getProblemTypeFromValue(this.problemType)).length != 0) {
+      this.dialogOpenerService.openDialog(SameProblemTypeErrorComponent, '250px', '300ms', '100ms');
+      return false;
+    }
+
+    if (this.numOfProblems <= 0) {
+      this.dialogOpenerService.openDialog(QuantityErrorComponent, '250px', '300ms', '100ms');
+      return false;
+    }
+    return true;
+  }
+
+  onSubmit(): void {
+    if (!this.validateSubmit())
+      return;
     this.addedProblemTypes.push({
       problemType: (<any>ProblemType)[this.problemTypeService.getKeyByValue(this.problemType)],
       quantity: this.numOfProblems

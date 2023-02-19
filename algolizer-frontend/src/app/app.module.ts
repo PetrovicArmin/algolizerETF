@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { RecommendationComponent } from './components/recommendation/recommendation.component';
 import { AssignmentFormComponent } from './components/assignment-form/assignment-form.component';
 import { AddedProblemTypeComponent } from './components/added-problem-type/added-problem-type.component';
+import { SameProblemTypeErrorComponent } from './dialogs/same-problem-type-error/same-problem-type-error.component';
+import { NonExistentProblemTypeComponent } from './dialogs/non-existent-problem-type/non-existent-problem-type.component';
+import { QuantityErrorComponent } from './dialogs/quantity-error/quantity-error.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,12 @@ import { AddedProblemTypeComponent } from './components/added-problem-type/added
     NavigationComponent,
     RecommendationComponent,
     AssignmentFormComponent,
-    AddedProblemTypeComponent
+    AddedProblemTypeComponent,
+    SameProblemTypeErrorComponent,
+    NonExistentProblemTypeComponent,
+    QuantityErrorComponent
   ],
+  entryComponents: [SameProblemTypeErrorComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -39,9 +47,10 @@ import { AddedProblemTypeComponent } from './components/added-problem-type/added
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [MatDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
