@@ -39,8 +39,8 @@ export class AssignmentFormComponent implements OnInit {
   } 
 
   onSubmit(): void {
-    if (this.addedProblemTypes.filter(prT => prT.problemType == (<any>ProblemType)[this.problemTypeService.getKeyByValue(this.problemType)]).length != 0) {
-      console.log("message about already in list!");
+    if (this.addedProblemTypes.filter(prT => prT.problemType == this.problemTypeService.getProblemTypeFromValue(this.problemType)).length != 0) {
+      alert("That item is already in the list!");
       return;
     }
     this.addedProblemTypes.push({

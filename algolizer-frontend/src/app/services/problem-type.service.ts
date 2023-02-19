@@ -18,4 +18,12 @@ export class ProblemTypeService {
     const index: number = Object.keys(ProblemType).indexOf(key);
     return Object.values(ProblemType)[index];
   }
+
+  getProblemTypeFromKey(key: string): ProblemType {
+    return (<any>ProblemType)[key];
+  }
+
+  getProblemTypeFromValue(value: string): ProblemType {
+    return (<any>ProblemType)[this.getKeyByValue(value)];
+  }
 }
