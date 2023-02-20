@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import RecommendationState from 'src/app/enums/RecommendationState';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -15,7 +16,8 @@ export class NavigationComponent implements OnInit{
   allRecommendationStates = RecommendationState;
 
   constructor(
-    private uiService: UiService
+    private uiService: UiService,
+    public router: Router
   ) {
 
   } 

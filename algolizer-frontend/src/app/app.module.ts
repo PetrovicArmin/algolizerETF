@@ -21,6 +21,7 @@ import { AddedProblemTypeComponent } from './components/added-problem-type/added
 import { SameProblemTypeErrorComponent } from './dialogs/same-problem-type-error/same-problem-type-error.component';
 import { NonExistentProblemTypeComponent } from './dialogs/non-existent-problem-type/non-existent-problem-type.component';
 import { QuantityErrorComponent } from './dialogs/quantity-error/quantity-error.component';
+import { QuestionComponent } from './components/question/question.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { QuantityErrorComponent } from './dialogs/quantity-error/quantity-error.
     AddedProblemTypeComponent,
     SameProblemTypeErrorComponent,
     NonExistentProblemTypeComponent,
-    QuantityErrorComponent
+    QuantityErrorComponent,
+    QuestionComponent
   ],
   entryComponents: [SameProblemTypeErrorComponent],
   imports: [

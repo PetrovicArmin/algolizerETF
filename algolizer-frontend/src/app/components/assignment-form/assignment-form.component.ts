@@ -9,6 +9,7 @@ import { DialogOpenerService } from 'src/app/services/dialog-opener.service';
 import { SameProblemTypeErrorComponent } from 'src/app/dialogs/same-problem-type-error/same-problem-type-error.component';
 import { NonExistentProblemTypeComponent } from 'src/app/dialogs/non-existent-problem-type/non-existent-problem-type.component';
 import { QuantityErrorComponent } from 'src/app/dialogs/quantity-error/quantity-error.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -27,7 +28,8 @@ export class AssignmentFormComponent implements OnInit {
 
   constructor(
     private problemTypeService: ProblemTypeService,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
+    private router: Router
   ) {
 
   }
@@ -71,5 +73,10 @@ export class AssignmentFormComponent implements OnInit {
 
   onDelete(problemTypeToDelete: ProblemType) {
     this.addedProblemTypes = this.addedProblemTypes.filter(addedProblem => addedProblem.problemType != problemTypeToDelete);
+  }
+
+  onStartExcercise(): void {
+    //here we can call subject from ui service to communicate, and also we can use some data propagation!
+    this.router.navigateByUrl('/quiz');
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import RecommendationState from 'src/app/enums/RecommendationState';
 import { UiService } from 'src/app/services/ui.service';
 import { trigger, transition, animate, style, state } from '@angular/animations';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,7 +26,8 @@ import { trigger, transition, animate, style, state } from '@angular/animations'
 export class RecommendationComponent implements OnInit{
   isShown: boolean = true;
   constructor(
-    private uiService: UiService
+    private uiService: UiService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {

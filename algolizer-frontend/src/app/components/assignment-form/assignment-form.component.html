@@ -14,7 +14,7 @@
             <input class="centered" type="number" name="numOfProblems" [(ngModel)]="numOfProblems" matInput placeholder="Number of problems">
         </mat-form-field> 
         <button class="add_button" mat-raised-button color="primary" (click)="onSubmit()">Add problem type</button>
-      </form>
+    </form>
       <br>
       <div>
         <mat-card class="item-container">
@@ -30,5 +30,8 @@
         <app-added-problem-type *ngFor="let item of addedProblemTypes" [addedProblemType]="item" (onDeleteEvent)="onDelete($event)">
         </app-added-problem-type>
       </div>
+    <div *ngIf="addedProblemTypes.length != 0">
+        <button mat-raised-button color="primary" (click)="onStartExcercise()">Start excercise!</button>
+    </div>
 </div>
 
