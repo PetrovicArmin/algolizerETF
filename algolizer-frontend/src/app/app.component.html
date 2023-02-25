@@ -1,5 +1,5 @@
 <app-navigation></app-navigation> <br>
 <app-recommendation *ngIf="this.router.url == '/dashboard'"></app-recommendation>
-<br> <br> <br>
+<div *ngIf="this.router.url == '/dashboard'"><br> <br> <br></div>
 <app-assignment-form *ngIf="this.router.url == '/dashboard'"></app-assignment-form>
 <app-question *ngIf="this.router.url == '/quiz'"></app-question>

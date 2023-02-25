@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'AlgolizerETF';
-
+  
   constructor(
     public router: Router
   ){}

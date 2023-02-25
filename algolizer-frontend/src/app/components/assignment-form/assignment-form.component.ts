@@ -10,6 +10,10 @@ import { SameProblemTypeErrorComponent } from 'src/app/dialogs/same-problem-type
 import { NonExistentProblemTypeComponent } from 'src/app/dialogs/non-existent-problem-type/non-existent-problem-type.component';
 import { QuantityErrorComponent } from 'src/app/dialogs/quantity-error/quantity-error.component';
 import { Router } from '@angular/router';
+import { UiService } from 'src/app/services/ui.service';
+import QuizInformation from 'src/app/interfaces/QuizInformation';
+import Question from 'src/app/interfaces/Question';
+import { QuestionService } from 'src/app/services/question.service';
 
 
 @Component({
@@ -29,7 +33,9 @@ export class AssignmentFormComponent implements OnInit {
   constructor(
     private problemTypeService: ProblemTypeService,
     private dialogOpenerService: DialogOpenerService,
-    private router: Router
+    private router: Router,
+    private uiService: UiService,
+    private questionService: QuestionService
   ) {
 
   }
@@ -76,7 +82,25 @@ export class AssignmentFormComponent implements OnInit {
   }
 
   onStartExcercise(): void {
-    //here we can call subject from ui service to communicate, and also we can use some data propagation!
+    let maxPoints = 0;
+    let questions: Question[] = [];
+
+    this.addedProblemTypes.forEach(addedProblemType => {
+      for (let i = 0; i < addedProblemType.quantity; i++) {
+        let question = this.questionService.generateQuestion(addedProblemType.problemType);
+        questions.push(question);
+        maxPoints += question.maxPoints;
+      }
+    });
+
+    let quizInformation: QuizInformation = {
+      questions: questions,
+      currentQuestionIndex: 0,
+      maxPoints: maxPoints,
+      currentPoints: 0
+    };
+
+    this.uiService.toggleQuizInformation(quizInformation);
     this.router.navigateByUrl('/quiz');
   }
 }

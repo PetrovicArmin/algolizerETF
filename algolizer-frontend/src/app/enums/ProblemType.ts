@@ -3,15 +3,17 @@ enum ProblemType {
     QUICK_SORT = "Quick sort algorithm",
     BUBBLE_SORT = "Bubble sort algorithm",
     BINARY_SEARCH = "Binary search on sorted array",
-    LINKED_LIST = "Linked list operations",
-    QUEUE = "Queue algorithms analysis", //BFS
-    STACK = "Stack algorithms analysis", //DFS
-    BST = "Binary search tree algorithms",
+    LINKED_LIST_OPERATIONS = "Linked list operations",
+    QUEUE_BFS = "Queue algorithms analysis",
+    STACK_DFS = "Stack algorithms analysis", 
+    BST_OPERATIONS = "Binary search tree algorithms",
+    AVL_OPERATIONS = "Binary search tree AVL balancing",
     EDMONDS_KARP = "Edmonds karp maximum flow algorithm",
     DIJKSTRA = "Dijkstra shortest path finder",
     KRUSKAL = "Kruskal minimum spanning tree",
-    HEAP = "Heap structure algorithms",
-    HASH_MAP = "Hashing structures and algorithms"
+    HEAP_OPERATIONS = "Heap structure algorithms",
+    HASH_MAP_OPERATIONS = "Hashing structures and algorithms",
+    RECURSION = "Recursion based algorithms"
 };
 
 export default ProblemType;

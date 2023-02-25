@@ -10,6 +10,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { HighlightModule, HIGHLIGHT_OPTIONS, HighlightOptions } from 'ngx-highlightjs';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -50,9 +52,23 @@ import { QuestionComponent } from './components/question/question.component';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    HighlightModule
   ],
-  providers: [MatDialog],
+  providers:[
+    MatDialog,
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: <HighlightOptions>{
+        lineNumbers: true,
+        coreLibraryLoader: () => import('highlight.js/lib/core'),
+        languages: {
+          typescript: () => import('highlight.js/lib/languages/typescript')
+        },
+        themePath: 'assets/styles/dark-theme.css'
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
