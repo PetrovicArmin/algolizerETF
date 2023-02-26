@@ -11,7 +11,7 @@ export class DialogOpenerService {
     private matDialog: MatDialog
   ) { }
 
-  openDialog(component: ComponentType<any>, width: string, enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.matDialog.open(component, {width, enterAnimationDuration, exitAnimationDuration});
+  openDialog(component: ComponentType<any>, width: string, enterAnimationDuration: string, exitAnimationDuration: string, data: any = {}): void {
+    this.matDialog.open(component, {width, enterAnimationDuration, exitAnimationDuration, data});
   }
 }

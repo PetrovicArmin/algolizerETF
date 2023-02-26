@@ -1,5 +1,14 @@
 <div class="questionContainer col" *ngIf="quizInformation.questions[quizInformation.currentQuestionIndex]">
     <p>{{quizInformation.questions[quizInformation.currentQuestionIndex].text}}</p>
     <pre><code [languages]="['typescript']" [lineNumbers]="true" [highlight]="quizInformation.questions[quizInformation.currentQuestionIndex].algorithm.code" ></code></pre>
-    <p>ODGOVOR</p>
+    <div class="answerContainer centered">
+        <div>        
+            <mat-form-field>
+                <input class="centered" type="number" name="answer" [(ngModel)]="answer" matInput placeholder="Your answer">
+            </mat-form-field> 
+        </div>
+        <div>
+            <button class="add_button" mat-raised-button color="primary" (click)="onSubmit()">Check your answer</button>
+        </div>
+    </div>
 </div>

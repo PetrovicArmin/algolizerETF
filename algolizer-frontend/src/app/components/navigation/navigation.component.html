@@ -17,6 +17,6 @@
         <button mat-raised-button color="primary" (click)="refreshRecommendations()">Refresh recommendations</button> 
     </span>
     <span *ngIf="this.router.url == '/quiz'">
-        <strong>Question 1 of 5</strong>
+        <strong>Question {{this.questionIndex+1}} of {{this.totalQuestionNumber}}. Points: {{this.points}} out of {{this.maxPoints}}</strong>
     </span>
 </mat-toolbar>

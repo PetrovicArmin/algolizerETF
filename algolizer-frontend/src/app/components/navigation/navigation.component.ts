@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UiService } from 'src/app/services/ui.service';
 import RecommendationState from 'src/app/enums/RecommendationState';
 import { Router } from '@angular/router';
+import QuizInformation from 'src/app/interfaces/QuizInformation';
 
 @Component({
   selector: 'app-navigation',
@@ -14,6 +15,10 @@ export class NavigationComponent implements OnInit{
   version: string = "1.0.0";
   recommendationState: RecommendationState = RecommendationState.FINISHED;
   allRecommendationStates = RecommendationState;
+  questionIndex: number = 0;
+  points: number = 0;
+  maxPoints: number = 0;
+  totalQuestionNumber: number = 0;
 
   constructor(
     private uiService: UiService,
@@ -23,6 +28,12 @@ export class NavigationComponent implements OnInit{
   } 
   ngOnInit(): void {
     this.uiService.recommendationSubject().subscribe(state => this.recommendationState = state);
+    this.uiService.quizSubject().subscribe(quizInfo => {
+      this.questionIndex = quizInfo?.currentQuestionIndex;
+      this.points = quizInfo?.currentPoints;
+      this.totalQuestionNumber = quizInfo?.questions?.length;
+      this.maxPoints = quizInfo?.maxPoints;
+    });
   }
 
   refreshRecommendations():void {

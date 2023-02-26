@@ -4,5 +4,6 @@ export default interface Algorithm {
     problemType: ProblemType,
     code: string,
     algorithmSteps: any[],
-    algorithmParameters: any
+    algorithmParameters: any,
+    componentRoute: string
 };
