@@ -25,7 +25,8 @@ import { NonExistentProblemTypeComponent } from './dialogs/non-existent-problem-
 import { QuantityErrorComponent } from './dialogs/quantity-error/quantity-error.component';
 import { QuestionComponent } from './components/question/question.component';
 import { AnswerInformationComponent } from './dialogs/answer-information/answer-information.component';
-import { BubbleSortComponent } from './components/bubble-sort/bubble-sort.component';
+import { BubbleSortComponent } from './algorithms/bubble-sort/bubble-sort.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BubbleSortComponent } from './components/bubble-sort/bubble-sort.compon
     QuantityErrorComponent,
     QuestionComponent,
     AnswerInformationComponent,
-    BubbleSortComponent
+    BubbleSortComponent,
+    DashboardComponent
   ],
   entryComponents: [SameProblemTypeErrorComponent],
   imports: [
