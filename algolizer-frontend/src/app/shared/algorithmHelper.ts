@@ -29,6 +29,21 @@ export const generateAlgorithmCodeString = (pointerIndex: number, algorithmArray
     return finalString;
 };
 
+import AlgorithmContext from "../interfaces/AlgorithmContext";
+
+export const createAlgorithmContextArray = (contextProperties: string[], contextValues: string[]) => {
+    let contextArray: AlgorithmContext[] = [];
+
+    for (let i = 0; i < contextProperties.length; i++) {
+        contextArray.push({
+            contextProperty: contextProperties[i],
+            propertyValue: contextValues[i]
+        });
+    }
+
+    return contextArray;
+}
+
 
 //šta pratiti u bubble sort algoritmu?
 /*
@@ -56,9 +71,9 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
     let step = {
         isSwapped: undefined as unknown as boolean,
         i: undefined as unknown as number,
-        j: undefined as unknown as number, 
+        j: undefined as unknown as number | undefined, 
         arr: arr,
-        numofSwaps: 0,
+        numOfSwaps: 0,
         line: 0,
         comparisonStatus: undefined as unknown as any,
         isSwappedStatus: undefined as unknown as any
@@ -108,24 +123,20 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
             step.line = 5;
             step.arr = deepArray(step.arr);
             push(steps, step);
-            step.comparisonStatus = undefined;
 
             let temp = arr[j]
             arr[j] = arr[j+1];
             arr[j+1] = temp;
 
-            step.arr = arr;
-            step.line = 6;
-            step.numofSwaps += 1;
+            step.line = 7;
+            step.numOfSwaps += 1;
             step.arr = deepArray(step.arr);
+            step.arr = arr;
+            step.isSwapped = true;
             push(steps, step);
 
             isSwapped = true;
-
-            step.isSwapped = true;
-            step.line = 7;
-            step.arr = deepArray(step.arr);
-            push(steps, step);
+            step.comparisonStatus = undefined;
           }
 
           if (falseCondition) {
@@ -145,12 +156,12 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
         step.isSwappedStatus = {
             shouldContinue: false
         };        
-        step.line = 8;
+        step.line = 10;
         step.arr = deepArray(step.arr);
         push(steps, step);
         step.isSwappedStatus = undefined;
 
-        step.line = 9;
+        step.line = 12;
         step.arr = deepArray(step.arr);
         push(steps, step);
         break;    
@@ -158,7 +169,8 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
         step.isSwappedStatus = {
             shouldContinue: true
         };
-        step.line = 8;
+        step.line = 10;
+        step.j = undefined;
         step.arr = deepArray(step.arr);
         push(steps, step);
         step.isSwappedStatus = undefined;

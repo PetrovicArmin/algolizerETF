@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { HighlightModule, HIGHLIGHT_OPTIONS, HighlightOptions } from 'ngx-highlightjs';
+import {MatTable, MatTableModule} from '@angular/material/table';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -59,7 +60,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatProgressSpinnerModule,
     MatCardModule,
     MatDialogModule,
-    HighlightModule
+    HighlightModule,
+    MatTableModule
   ],
   providers:[
     MatDialog,
