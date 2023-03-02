@@ -35,19 +35,19 @@ export class QuestionService {
       case ProblemType.BUBBLE_SORT:
         question.algorithm.code = generateAlgorithmCodeString(0, ALGORITHMS.BUBBLE_SORT_CODE_ARRAY);
 
-        question.maxPoints = 2; //ovo mi odlučujemo koliko će koji algoritam nositi poena.
-
+        
         let n = this.randomIntFromInterval(7, 12);
         let arr = [];
-
+        
         for (let i = 0; i < n; i++)
-          arr.push(this.randomIntFromInterval(1, 100));
-
+        arr.push(this.randomIntFromInterval(1, 100));
+        
         question.algorithm.algorithmParameters.array = arr;
         question.text = "Let there be an array: [" + arr.toString() + "]. How many swap operations will bubble sort algorithm have when we use it to sort this array?";
         question.algorithm.algorithmSteps = bubbleSortStepsGenerator(arr);
         question.algorithm.componentRoute = "/bubble-sort";
-        question.answer = question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numofSwaps;
+        question.answer = question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numOfSwaps;
+        question.maxPoints = Math.round((n/12.000 + question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numOfSwaps/100.0)*100)/100.00 ; //ovo mi odlučujemo koliko će koji algoritam nositi poena.
         break;
       default:
         question.text = "These algorithms are in preparation!";

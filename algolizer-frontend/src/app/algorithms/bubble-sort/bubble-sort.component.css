@@ -14,6 +14,15 @@
     align-content: top;
 }
 
+.buttonContainer {
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 20px;
+    justify-items: center;
+    align-content: top;
+}
+
 .step_button {
     margin: 10px;
 }

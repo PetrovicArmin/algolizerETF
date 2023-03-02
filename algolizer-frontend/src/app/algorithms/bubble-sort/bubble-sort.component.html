@@ -7,12 +7,15 @@
     <div class="div_auto_height">
         <pre><code [languages]="['typescript']" [lineNumbers]="true" [highlight]="this.algorithm.code" ></code></pre>
     </div>
-    <div class="gridContainer">
+    <div class="buttonContainer">
         <div>
             <button class="step_button" mat-raised-button color="primary" (click)="previousStep()">Previous step</button>
         </div>
         <div>
             <button class="step_button" mat-raised-button color="primary" (click)="nextStep()">Next step</button>
+        </div>
+        <div>
+            <button class="step_button" mat-raised-button color="primary" (click)="closeVisualisation()">Close visualisation</button>
         </div>
     </div>
     <div>

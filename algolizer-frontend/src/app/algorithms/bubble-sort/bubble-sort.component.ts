@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import ProblemType from 'src/app/enums/ProblemType';
 import Algorithm from 'src/app/interfaces/Algorithm';
 import AlgorithmContext from 'src/app/interfaces/AlgorithmContext';
+import QuizInformation from 'src/app/interfaces/QuizInformation';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { UiService } from 'src/app/services/ui.service';
 import { ALGORITHMS, createAlgorithmContextArray, generateAlgorithmCodeString } from 'src/app/shared/algorithmHelper';
@@ -50,11 +52,19 @@ export class BubbleSortComponent implements OnInit, AfterViewInit{
   currentStep: number = 0;
   constructor(
     private uiService: UiService,
-    private canvasService: CanvasService
+    private canvasService: CanvasService,
+    private router: Router
   ) {}
 
+  quiz: QuizInformation = {
+    questions: [],
+    currentQuestionIndex: 0,
+    maxPoints: 0,
+    currentPoints: 0
+  };
+
   ngOnInit(): void {
-    
+    this.uiService.quizSubject().subscribe(quiz => this.quiz = quiz);
   }
 
   nextStep(): void {
@@ -69,6 +79,12 @@ export class BubbleSortComponent implements OnInit, AfterViewInit{
       return;
     this.currentStep--;
     this.showStep(this.algorithm.algorithmSteps[this.currentStep]);
+  }
+
+  closeVisualisation(): void {
+    this.quiz.currentQuestionIndex += 1;
+    this.uiService.toggleQuizInformation(this.quiz);
+    this.router.navigateByUrl("/quiz");
   }
 
   showStep(step: any):void {
