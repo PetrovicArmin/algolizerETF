@@ -1,8 +1,16 @@
 <!--Za sada samo canvas prikaz napraviti, a ostalo će se lagano dodati!-->
-<br>
-<br>
-<div class="centered">
-    <canvas class="pink_border" #myCanvas width="800" height="600" style="background-color:white"></canvas>
+<div class="gridContainer">
+    <div class="div_auto_height"> 
+        <br>
+        <canvas class="pink_border" #myCanvas width="{{this.WIDTH}}" height="{{this.HEIGHT}}" style="background-color:white"></canvas>
+    </div>
+    <div class="div_auto_height">
+        <pre><code [languages]="['typescript']" [lineNumbers]="true" [highlight]="this.algorithm.code" ></code></pre>
+    </div>
+    <div>
+        Ovdje ide context algoritma!
+    </div>
+    <div>Ovdje idu opcije - next step, current step.</div>
 </div>
 
 <button (click)="previousStep()"></button>

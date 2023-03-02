@@ -5,3 +5,15 @@
 .pink_border {
     border: 3px solid palevioletred;
 }
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 20px;
+    justify-items: center;
+    align-content: top;
+}
+
+.div_auto_height {
+    height: fit-content;
+}

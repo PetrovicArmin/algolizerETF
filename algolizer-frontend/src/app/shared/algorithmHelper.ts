@@ -45,7 +45,11 @@ linija koda - prikaz strelicom u kodu - ovo je linija koda nakon čijeg izvršen
 const push = (steps: any[], step: any) => {
     steps.push(JSON.parse(JSON.stringify(step)));
 }
- 
+
+const deepArray = (arr: any[]) => {
+    return JSON.parse(JSON.stringify(arr));
+}
+
 export const bubbleSortStepsGenerator = (arr: number[]): any[] => {      
     let falseCondition = true;
     let steps:any[] = [];
@@ -66,6 +70,7 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
 
     step.isSwapped = false;
     step.line = 1;
+    step.arr = deepArray(step.arr);
 
     push(steps, step);
 
@@ -73,18 +78,21 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
 
       step.i = i;
       step.line = 2;  
+      step.arr = deepArray(step.arr);
       push(steps, step);
 
       isSwapped = false;
       
       step.isSwapped = false;
       step.line = 3;
+      step.arr = deepArray(step.arr);
       push(steps, step);
 
       for(let j = 0; j < arr.length - i - 1; j++){
         
         step.j = j;
         step.line = 4;
+        step.arr = deepArray(step.arr);
         push(steps, step);
 
         falseCondition = true;
@@ -98,6 +106,7 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
                 shouldChange: true
             }
             step.line = 5;
+            step.arr = deepArray(step.arr);
             push(steps, step);
             step.comparisonStatus = undefined;
 
@@ -108,12 +117,14 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
             step.arr = arr;
             step.line = 6;
             step.numofSwaps += 1;
+            step.arr = deepArray(step.arr);
             push(steps, step);
 
             isSwapped = true;
 
             step.isSwapped = true;
             step.line = 7;
+            step.arr = deepArray(step.arr);
             push(steps, step);
           }
 
@@ -124,6 +135,7 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
                 shouldChange: false
             }
             step.line = 5;
+            step.arr = deepArray(step.arr);
             push(steps, step);
             step.comparisonStatus = false;
           }          
@@ -134,10 +146,12 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
             shouldContinue: false
         };        
         step.line = 8;
+        step.arr = deepArray(step.arr);
         push(steps, step);
         step.isSwappedStatus = undefined;
 
         step.line = 9;
+        step.arr = deepArray(step.arr);
         push(steps, step);
         break;    
       } else {
@@ -145,6 +159,7 @@ export const bubbleSortStepsGenerator = (arr: number[]): any[] => {
             shouldContinue: true
         };
         step.line = 8;
+        step.arr = deepArray(step.arr);
         push(steps, step);
         step.isSwappedStatus = undefined;
       }

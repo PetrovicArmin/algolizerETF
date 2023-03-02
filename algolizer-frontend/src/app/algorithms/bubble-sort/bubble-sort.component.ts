@@ -3,11 +3,8 @@ import ProblemType from 'src/app/enums/ProblemType';
 import Algorithm from 'src/app/interfaces/Algorithm';
 import { CanvasService } from 'src/app/services/canvas.service';
 import { UiService } from 'src/app/services/ui.service';
+import { ALGORITHMS, generateAlgorithmCodeString } from 'src/app/shared/algorithmHelper';
 
-const WIDTH = 800;
-const HEIGHT = 600;
-const EL_WIDTH = 50;
-const EL_HEIGHT = 50;
 
 @Component({
   selector: 'app-bubble-sort',
@@ -19,13 +16,20 @@ export class BubbleSortComponent implements OnInit, AfterViewInit{
   canvas: ElementRef<HTMLCanvasElement> = {} as ElementRef;
   context: any = {} as any;
 
+  WIDTH = 650;
+  HEIGHT = 280;
+  EL_WIDTH = 50;
+  EL_HEIGHT = 50;
+  
   ngAfterViewInit(): void {
-    this.context = this.canvas.nativeElement.getContext('2d');
-    this.canvasService.setCanvas(this.canvas);
-    this.canvasService.setContext(this.context);
-    this.uiService.quizSubject().subscribe(quiz => {
-      this.algorithm = quiz.questions[quiz.currentQuestionIndex].algorithm;
-      this.showStep(this.algorithm.algorithmSteps[this.currentStep]);
+    setTimeout(() => {
+      this.context = this.canvas.nativeElement.getContext('2d');
+      this.canvasService.setCanvas(this.canvas);
+      this.canvasService.setContext(this.context);
+      this.uiService.quizSubject().subscribe(quiz => {
+        this.algorithm = quiz.questions[quiz.currentQuestionIndex].algorithm;
+        this.showStep(this.algorithm.algorithmSteps[this.currentStep]);
+      });
     });
   }
 
@@ -62,19 +66,24 @@ export class BubbleSortComponent implements OnInit, AfterViewInit{
   }
 
   showStep(step: any):void {
-    this.canvasService.clear(WIDTH, HEIGHT);
+    this.canvasService.clear(this.WIDTH, this.HEIGHT);
     let colors: string[] = [];
     for (let i = 0; i < this.algorithm.algorithmParameters.array.length; i++)
       colors.push("black");
     if (step.j != undefined) {
       colors[step.j] = "red";
       colors[step.j + 1] = "red";
-      this.canvasService.drawPointer(this.canvasService.getElementX(step.j), HEIGHT/2 + 50, "j", 30, 0);
+      this.canvasService.drawPointer(this.canvasService.getElementX(step.j), this.HEIGHT/2 + 50, "j", 30, 0);
     }
 
     if (step.i != undefined) {
-      this.canvasService.drawPointer(this.canvasService.getElementX(this.algorithm.algorithmParameters.array.length - step.i - 1), HEIGHT/2 + 20, "arr.len - i - 1", 30, -30);
+      this.canvasService.drawPointer(this.canvasService.getElementX(this.algorithm.algorithmParameters.array.length - step.i - 1), this.HEIGHT/2 + 20, "arr.len - i - 1", 30, -30);
     }
-    this.canvasService.drawArray(this.algorithm.algorithmParameters.array, 20, HEIGHT/2 - 30, EL_WIDTH, EL_HEIGHT, colors);
+
+    if (step.line) {
+      this.algorithm.code = generateAlgorithmCodeString(step.line, ALGORITHMS.BUBBLE_SORT_CODE_ARRAY);
+    }
+
+    this.canvasService.drawArray(step.arr, 20, this.HEIGHT/2 - 30, this.EL_WIDTH, this.EL_HEIGHT, colors);
   }
 }
