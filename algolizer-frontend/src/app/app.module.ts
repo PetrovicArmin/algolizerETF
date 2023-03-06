@@ -28,6 +28,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { AnswerInformationComponent } from './dialogs/answer-information/answer-information.component';
 import { BubbleSortComponent } from './algorithms/bubble-sort/bubble-sort.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MergeSortComponent } from './algorithms/merge-sort/merge-sort.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     QuestionComponent,
     AnswerInformationComponent,
     BubbleSortComponent,
-    DashboardComponent
+    DashboardComponent,
+    MergeSortComponent
   ],
   entryComponents: [SameProblemTypeErrorComponent],
   imports: [

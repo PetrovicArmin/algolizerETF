@@ -14,6 +14,25 @@ export const ALGORITHMS = {
         '        }',
         '    }'
     ] as string[],
+    MERGE_SORT_CODE_ARRAY: [
+        '    function mergeSort(arr) {',
+        '        if (arr.length <= 1) ',
+        '            return arr',
+        '        let mid = Math.floor(arr.length / 2);',
+        '',
+        '        let left = mergeSort(arr.slice(0, mid));',
+        '        let right = mergeSort(arr.slice(mid));',
+        '',
+        '        let sortedArr = [];',
+        '        while (left.length && right.length) {',
+        '            if (left[0] < right[0])',
+        '                sortedArr.push(left.shift())',
+        '            else', 
+        '                sortedArr.push(right.shift())',
+        '        }',
+        '        return [...sortedArr, ...left, ...right]',
+        '  }'
+    ] as string[]
 };
 
 
@@ -44,19 +63,6 @@ export const createAlgorithmContextArray = (contextProperties: string[], context
     return contextArray;
 }
 
-
-//šta pratiti u bubble sort algoritmu?
-/*
-Algorithm context - to su stanja svih varijabli u samom algoritmu:
-    isSwapped: boolean - primitivni prikaz,
-    i: number - primitivni, i prikaz strelicom na nizu,
-    j: number - primitivni, i prikaz strelicom na nizu,
-    arr: niz - vizualni prikaz
-Traženo rješenje:
-    broj zamjena: - primitivni prikaz na ekranu.
-linija koda - prikaz strelicom u kodu - ovo je linija koda nakon čijeg izvršenja imamo prikazano stanje na ekranu
-*/
-
 const push = (steps: any[], step: any) => {
     steps.push(JSON.parse(JSON.stringify(step)));
 }
@@ -64,6 +70,139 @@ const push = (steps: any[], step: any) => {
 const deepArray = (arr: any[]) => {
     return JSON.parse(JSON.stringify(arr));
 }
+
+//vraćanja moraju biti ispravna radi rekurzije
+//steps objekat / niz će biti izgrađen kroz rekurziju, jer se cijelo vrijeme radi o istoj referenci
+//odnosno, o različitim referencama na isti objekat!
+
+let step: any = {
+    array: [],
+    left_array: [],
+    right_array: [],
+    sorted_array: [],
+    mid_position: 0,
+    left_arr_position: 0,
+    right_arr_position: 0,
+    recursion_depth: -1,
+    line: 0,
+    if_condition: undefined,
+    going_back: false,
+    going_forward: false
+};
+
+export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any): any[] => {
+    step = {
+        array: arr,
+        left_array: undefined,
+        right_array: undefined,
+        sorted_array: undefined,
+        mid_position: undefined,
+        left_arr_position: undefined,
+        right_arr_position: undefined,
+        going_back: false,
+        going_forward: false,
+        merging: false,
+        recursion_depth: step.recursion_depth + 1,
+        line: 0,
+        numOfFalse: step.numOfFalse,
+        numOfTrue: step.numOfTrue
+    };
+
+    push(steps, step);
+
+    if (arr.length <= 1) {
+        step.going_back = true;
+        step.line = 2;
+        push(steps, step);
+        step.going_back = false;
+        return arr;
+    } 
+
+    let mid = Math.floor(arr.length / 2);
+
+    step.mid_position = mid;
+    step.line = 3;
+    push(steps, step);
+  
+    step.line = 5;
+    step.going_forward = true;
+    push(steps, step);
+    step.going_forward = false;
+
+    let left = mergeSortStepsGenerator(arr.slice(0, mid), steps, step);
+
+    step.left_array = left;
+    step.line = 5;
+    push(steps, step);
+
+    step.line = 6;
+    step.going_forward = true;
+    push(steps, step);
+    step.going_forward = false;
+
+    let right = mergeSortStepsGenerator(arr.slice(mid), steps, step);
+
+    step.right_array = right;
+    step.line = 6;
+    push(steps, step);
+
+    let sortedArr: number[] = [];
+
+    step.sorted_array = deepArray(sortedArr);
+    step.line = 8;
+    step.merging = true;
+
+    push(steps, step);
+
+    let left_position = 0;
+    let right_position = 0;
+
+    while (left.length && right.length) {
+
+        if (left[0] < right[0]) {
+            step.numOfTrue += 1;
+            step.line = 10;
+            step.if_condition = true;
+            push(steps, step);
+
+            sortedArr.push(left.shift());
+            left_position += 1;
+
+            step.line = 11;
+            step.if_condition = undefined;
+            step.sorted_array = deepArray(sortedArr);
+            step.left_arr_position = left_position;
+            push(steps, step);
+        }
+        else {
+            step.numOfFalse += 1;
+            step.line = 10;
+            step.if_condition = false;
+            push(steps, step);
+
+            sortedArr.push(right.shift());
+            right_position += 1;
+
+            step.line = 13;
+            step.if_condition = undefined;
+            step.sorted_array = deepArray(sortedArr);
+            step.right_arr_position = right_position;
+            push(steps, step);
+        }
+    }
+
+    sortedArr = [...sortedArr, ...left, ...right];
+
+    step.line = 15;
+    step.sorted_array = deepArray(sortedArr);
+    step.going_back = true;
+
+    push(steps, step);
+
+    step.going_back = false;
+
+    return sortedArr;
+};
 
 export const bubbleSortStepsGenerator = (arr: number[]): any[] => {      
     let falseCondition = true;
