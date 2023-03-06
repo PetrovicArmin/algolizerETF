@@ -82,8 +82,6 @@ export class QuestionService {
           numofTrue: 0
         };
 
-        question.algorithm.algorithmSteps.push(step);
-
         //utiče indirektno na objekat algorithmSteps.
         mergeSortStepsGenerator(arr, question.algorithm.algorithmSteps, step);
 
