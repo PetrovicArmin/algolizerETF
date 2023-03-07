@@ -90,9 +90,9 @@ let step: any = {
     going_forward: false
 };
 
-export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any): any[] => {
+export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any): any => {
     step = {
-        array: arr,
+        array: deepArray(arr),
         left_array: undefined,
         right_array: undefined,
         sorted_array: undefined,
@@ -115,7 +115,11 @@ export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any):
         step.line = 2;
         push(steps, step);
         step.going_back = false;
-        return arr;
+        return {
+            sortedArr:arr,
+            numOfFalse: step.numOfFalse,
+            numOfTrue: step.numOfTrue
+        };
     } 
 
     let mid = Math.floor(arr.length / 2);
@@ -129,9 +133,13 @@ export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any):
     push(steps, step);
     step.going_forward = false;
 
-    let left = mergeSortStepsGenerator(arr.slice(0, mid), steps, step);
+    let result = mergeSortStepsGenerator(arr.slice(0, mid), steps, step);
 
-    step.left_array = left;
+    let left = result.sortedArr;
+    step.numOfFalse = result.numOfFalse;
+    step.numOfTrue = result.numOfTrue;
+
+    step.left_array = deepArray(left);
     step.line = 5;
     push(steps, step);
 
@@ -140,9 +148,12 @@ export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any):
     push(steps, step);
     step.going_forward = false;
 
-    let right = mergeSortStepsGenerator(arr.slice(mid), steps, step);
+    result = mergeSortStepsGenerator(arr.slice(mid), steps, step);
+    let right = result.sortedArr;
+    step.numOfFalse = result.numOfFalse;
+    step.numOfTrue = result.numOfTrue;
 
-    step.right_array = right;
+    step.right_array = deepArray(right);
     step.line = 6;
     push(steps, step);
 
@@ -156,6 +167,8 @@ export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any):
 
     let left_position = 0;
     let right_position = 0;
+    step.left_arr_position = 0;
+    step.right_arr_position = 0;
 
     while (left.length && right.length) {
 
@@ -201,7 +214,11 @@ export const mergeSortStepsGenerator = (arr: number[], steps: any[], step: any):
 
     step.going_back = false;
 
-    return sortedArr;
+    return {
+        sortedArr: sortedArr,
+        numOfFalse: step.numOfFalse,
+        numOfTrue: step.numOfTrue
+    };
 };
 
 export const bubbleSortStepsGenerator = (arr: number[]): any[] => {      

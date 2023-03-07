@@ -79,17 +79,14 @@ export class QuestionService {
           if_condition: undefined,
           line: 0,
           numOfFalse: 0,
-          numofTrue: 0
+          numOfTrue: 0
         };
 
         //utiče indirektno na objekat algorithmSteps.
         mergeSortStepsGenerator(arr, question.algorithm.algorithmSteps, step);
 
-        console.log("Generirani algorithm koraci za merge sort:");
-        console.log(question.algorithm.algorithmSteps);
-
         question.algorithm.componentRoute = "/merge-sort";
-        question.maxPoints = Math.round((n/16.000 + question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numofFalse/100.0)*100)/100.00 ;
+        question.maxPoints = Math.round((n/16.000 + question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numOfFalse/100.0)*100)/100.00 ;
 
         let option = this.randomIntFromInterval(0,1);
         let stringAppendix = "false";
@@ -98,7 +95,7 @@ export class QuestionService {
         if (option == 1) {        
           stringAppendix = "true";
           question.answer = question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numOfTrue;
-          question.maxPoints = Math.round((n/16.000 + question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numofTrue/100.0)*100)/100.00 ;
+          question.maxPoints = Math.round((n/16.000 + question.algorithm.algorithmSteps[question.algorithm.algorithmSteps.length-1].numOfTrue/100.0)*100)/100.00 ;
         }
 
         question.text = "Let there be an array: [" + arr.toString() + "]. How many times will if condition in while loop be " + stringAppendix + " ?";

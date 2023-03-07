@@ -30,7 +30,6 @@ export class QuestionComponent implements OnInit{
 
   ngOnInit(): void {
     this.uiService.quizSubject().subscribe(quizInformation => this.quizInformation = quizInformation);
-    console.log(this.quizInformation.questions[this.quizInformation.currentQuestionIndex]);
   }
 
   onSubmit(): void {
@@ -42,7 +41,7 @@ export class QuestionComponent implements OnInit{
     let questionPoints = this.quizInformation.questions[this.quizInformation.currentQuestionIndex].maxPoints;
     let message = "";
     if (correctAnswer != this.answer?.toString())
-      message = "Your answer is incorrect! Exact number of swap operations is: " + correctAnswer;
+      message = "Your answer is incorrect! Correct answer is: " + correctAnswer;
     else {
       message = "Your answer is correct!"; 
       this.quizInformation.currentPoints += questionPoints;

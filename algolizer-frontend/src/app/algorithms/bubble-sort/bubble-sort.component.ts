@@ -35,8 +35,11 @@ export class BubbleSortComponent implements OnInit, AfterViewInit{
       this.canvasService.setCanvas(this.canvas);
       this.canvasService.setContext(this.context);
       this.uiService.quizSubject().subscribe(quiz => {
-        this.algorithm = quiz.questions[quiz.currentQuestionIndex].algorithm;
-        this.showStep(this.algorithm.algorithmSteps[this.currentStep]);
+        if (quiz.questions) {
+          this.algorithm = quiz.questions[quiz.currentQuestionIndex].algorithm;
+          if (this.algorithm != undefined)
+            this.showStep(this.algorithm.algorithmSteps[this.currentStep]);
+        }
       });
     });
   }
